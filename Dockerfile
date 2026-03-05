@@ -3,6 +3,5 @@ RUN pip install uv
 WORKDIR /app
 COPY . .
 RUN uv sync
-RUN uv run init.py --reset
 EXPOSE 8000
-CMD ["uv", "run", "main.py"]
+CMD sh -c "uv run init.py --reset && uv run main.py"
