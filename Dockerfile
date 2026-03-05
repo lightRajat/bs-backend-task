@@ -3,5 +3,5 @@ RUN pip install uv
 WORKDIR /app
 COPY . .
 RUN uv sync
-EXPOSE 8000
-CMD sh -c "uv run init.py --reset && uv run main.py"
+EXPOSE 7860
+CMD sh -c "uv run init.py --reset && uvicorn main:app --port 7860"
