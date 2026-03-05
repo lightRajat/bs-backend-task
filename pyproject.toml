@@ -1,7 +1,7 @@
 [project]
-name = "bs-task"
+name = "bs-backend-task"
 version = "0.1.0"
-description = "Add your description here"
+description = "Backend task of Bitespeed's recruitment for Engineering Intern"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
