@@ -3,11 +3,18 @@ from app.schemas import IdentifyRequest, IdentifyResponse
 from app.utils import create_contact_response_schema, log
 from dotenv import load_dotenv
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 import os
 load_dotenv()
 
 app = FastAPI()
 db = DBEngine(os.getenv("DATABASE_URL"))
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+@app.get("/", response_class=FileResponse)
+async def index():
+    return FileResponse("static/index.html")
 
 @app.post("/identify", response_model=IdentifyResponse)
 async def identify(identity: IdentifyRequest):

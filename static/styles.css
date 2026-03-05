@@ -1,0 +1,52 @@
+pre {
+    background-color: #f8fafc;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border: 1px solid #e2e8f0;
+}
+
+.string {
+    color: #059669;
+}
+
+/* Emerald-600 */
+.number {
+    color: #2563eb;
+}
+
+/* Blue-600 */
+.boolean {
+    color: #7c3aed;
+}
+
+/* Violet-600 */
+.null {
+    color: #dc2626;
+}
+
+/* Red-600 */
+.key {
+    color: #334155;
+    font-weight: 600;
+}
+
+/* Smooth transitions */
+.fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
