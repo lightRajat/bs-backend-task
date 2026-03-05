@@ -1,13 +1,16 @@
 from app.db import DBEngine
 from app.schemas import IdentifyRequest, IdentifyResponse
 from app.utils import create_contact_response_schema, log
+from dotenv import load_dotenv
 from fastapi import FastAPI
+import os
+load_dotenv()
 
 app = FastAPI()
-db = DBEngine()
+db = DBEngine(os.getenv("DATABASE_URL"))
 
 @app.post("/identify", response_model=IdentifyResponse)
-def identify(identity: IdentifyRequest):
+async def identify(identity: IdentifyRequest):
     try:
         contacts = db.get_contacts_by_email_phone(identity.email, identity.phoneNumber)
         log(f"Contacts: {contacts}")

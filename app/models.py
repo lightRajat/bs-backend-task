@@ -13,7 +13,7 @@ class Contact(Base):
     phoneNumber = Column(String, nullable=True)
     email = Column(String, nullable=True)
     linkedId = Column(Integer, ForeignKey("Contact.id"), nullable=True)
-    linkPrecedence = Column(Enum("primary", "secondary"), nullable=False)
+    linkPrecedence = Column(Enum("primary", "secondary", name="contact__link_precedence"), nullable=False)
     createdAt = Column(DateTime, nullable=False, server_default=func.now())
     updatedAt = Column(DateTime, nullable=False, server_default=func.now())
     deletedAt = Column(DateTime, nullable=True)

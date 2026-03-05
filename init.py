@@ -2,17 +2,18 @@ from app.models import Base, Contact
 from app.utils import log
 import csv
 from datetime import datetime
+from dotenv import load_dotenv
 import os
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, inspect, text
 from sqlalchemy.orm import Session
+import sys
+load_dotenv()
 
-def create_db(db_path: str = "data.db") -> None:
-    engine = create_engine(f"sqlite:///{db_path}")
+def create_db(engine) -> None:
     Base.metadata.create_all(engine)
     log("Database created successfully.")
 
-def load_sample_data(sample_data_path: str = "sample-data.csv", db_path: str = "data.db") -> None:
-    engine = create_engine(f"sqlite:///{db_path}")
+def load_sample_data(engine, sample_data_path: str = "sample-data.csv") -> None:
     session = Session(engine)
 
     with open(sample_data_path, "r") as f:
@@ -34,12 +35,15 @@ def load_sample_data(sample_data_path: str = "sample-data.csv", db_path: str = "
     log("Sample data loaded successfully.")
 
 if __name__ == "__main__":
-    if os.path.exists("data.db"):
-        option = input("Database already exists. Do you want to reset? (y/n): ")
-        if option.lower() == "y":
-            os.remove("data.db")
+    engine = create_engine(os.getenv("DATABASE_URL"))
+
+    if inspect(engine).has_table("Contact", schema="public"):
+        if len(sys.argv) > 1 and sys.argv[1] == "--reset":
+            with engine.connect() as conn:
+                conn.execute(text('TRUNCATE TABLE "Contact" RESTART IDENTITY CASCADE'))
+                conn.commit()
         else:
             os._exit(0)
 
-    create_db()
-    load_sample_data()
+    create_db(engine)
+    load_sample_data(engine)

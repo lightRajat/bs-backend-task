@@ -4,8 +4,8 @@ from sqlalchemy import create_engine, select, or_
 from sqlalchemy.orm import Session
 
 class DBEngine:
-    def __init__(self, db_path: str = "data.db"):
-        self.engine = create_engine(f"sqlite:///{db_path}")
+    def __init__(self, db_url: str):
+        self.engine = create_engine(db_url)
         self.session = Session(self.engine)
     
     def get_contacts_by_email_phone(self, email: str, phone: str) -> list[Contact]:
