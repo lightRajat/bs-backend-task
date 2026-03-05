@@ -12,8 +12,10 @@ pinned: false
 ## 🚀 Live Deployment
 
 ```
-https://lightrajat-bs-backend-task.hf.space/identify
+https://lightrajat-bs-backend-task.hf.space/
 ```
+
+> Raw endpoint accepting only POST requests: `https://lightrajat-bs-backend-task.hf.space/identify`
 
 ## 🗂 Request / Response Structure
 
