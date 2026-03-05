@@ -6,6 +6,9 @@ Base = declarative_base()
 class Contact(Base):
     __tablename__ = "Contact"
 
+    def __repr__(self):
+        return f"Contact(id={self.id}, phoneNumber={self.phoneNumber!r}, email={self.email!r}, linkedId={self.linkedId!r}, linkPrecedence={self.linkPrecedence})"
+
     id = Column(Integer, primary_key=True)
     phoneNumber = Column(String, nullable=True)
     email = Column(String, nullable=True)

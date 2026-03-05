@@ -5,7 +5,7 @@ class IdentifyRequest(BaseModel):
     phoneNumber: str | None
 
 class Contact(BaseModel):
-    primaryContatctId: int
+    primaryContactId: int
     emails: list[str]
     phoneNumbers: list[str]
     secondaryContactIds: list[int]
