@@ -9,13 +9,13 @@ pinned: false
 
 # BiteSpeed Backend Task
 
-## Live Deployment
+## 🚀 Live Deployment
 
 ```
 https://lightrajat-bs-backend-task.hf.space/identify
 ```
 
-## Request / Response Structure
+## 🗂 Request / Response Structure
 
 ### Request
 
@@ -39,14 +39,14 @@ https://lightrajat-bs-backend-task.hf.space/identify
 }
 ```
 
-## Tech Stack
+## 🛠 Tech Stack
 
 * **FastAPI** – Backend server
 * **Supabase** — PostgreSQL database
 * **Docker** – Containerization
 * **Hugging Face** – Hosting platform
 
-## Identification Algorithm
+## 🧠 Identification Algorithm
 
 To solve the [given problem](https://drive.google.com/file/d/1h3xh2PKP8aQW85hDdn2qUkXDUUAVDKaP/view), my algorithm follows these steps:
 
@@ -75,7 +75,7 @@ All other primaries are converted to **secondary contacts** and linked to the ol
 
 If the request contains a **new email or phone number not already present** in the contacts found so far, a new **secondary contact** is created and linked to the identified primary contact.
 
-## Local Setup
+## ⚙️ Local Setup
 
 ### Prerequisites
 
