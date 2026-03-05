@@ -43,10 +43,10 @@ https://lightrajat-bs-backend-task.hf.space/
 
 ## 🛠 Tech Stack
 
-* **FastAPI** – Backend server
-* **Supabase** — PostgreSQL database
-* **Docker** – Containerization
-* **Hugging Face** – Hosting platform
+* **FastAPI** as Backend server
+* **Neon** for PostgreSQL database
+* **Hugging Face** as Hosting platform through **Docker**
+* **Vanilla JS + Tailwind** CSS for frontend
 
 ## 🧠 Identification Algorithm
 
