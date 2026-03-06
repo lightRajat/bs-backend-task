@@ -6,6 +6,7 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 import os
+from time import time
 load_dotenv()
 
 app = FastAPI()
@@ -18,6 +19,7 @@ async def index():
 
 @app.post("/identify", response_model=IdentifyResponse)
 async def identify(identity: IdentifyRequest):
+    start_time = time()
     session = db.get_session()
 
     try:
@@ -53,6 +55,7 @@ async def identify(identity: IdentifyRequest):
     finally:
         session.close()
 
+    log(f"Time taken: {round(time() - start_time, 2)} seconds")
     return response
 
 if __name__ == "__main__":
