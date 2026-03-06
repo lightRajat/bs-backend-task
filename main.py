@@ -18,20 +18,29 @@ async def index():
 
 @app.post("/identify", response_model=IdentifyResponse)
 async def identify(identity: IdentifyRequest):
+    session = db.get_session()
+
     try:
-        contacts = db.get_contacts_by_email_phone(identity.email, identity.phoneNumber)
+        contacts = db.get_contacts_by_email_phone(session, identity.email, identity.phoneNumber)
         log(f"Contacts: {contacts}")
-        contacts = db.get_connected_contacts(contacts)
+
+        contacts = db.get_connected_contacts(session, contacts)
         log(f"Connected Contacts: {contacts}")
-        contacts = db.resolve_multiple_primary_keys(contacts)
+
+        contacts = db.resolve_multiple_primary_keys(session, contacts)
         log(f"Resolved Multiple Primary Keys: {contacts}")
-        contacts = db.resolve_new_data(contacts, identity.email, identity.phoneNumber)
+
+        contacts = db.resolve_new_data(session, contacts, identity.email, identity.phoneNumber)
         log(f"Resolved New Data: {contacts}")
+
+        session.commit()
 
         response = IdentifyResponse(
             contact=create_contact_response_schema(contacts)
         )
     except Exception as e:
+        session.rollback()
+        
         log(e, is_error=True)
         response = IdentifyResponse(
             contact = {
@@ -41,6 +50,8 @@ async def identify(identity: IdentifyRequest):
                 "secondaryContactIds": []
             }
         )
+    finally:
+        session.close()
 
     return response
 
